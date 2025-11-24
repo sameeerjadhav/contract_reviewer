@@ -1,0 +1,49 @@
+{
+    "contract_type": "nda",
+    "version": "1.0",
+    "last_updated": "2025-11-20",
+    "preferred_terms": {
+        "confidentiality_duration": {
+            "preferred": "Perpetual for trade secrets, 5 years for other info",
+            "acceptable": "3 years after termination",
+            "minimum_acceptable": "2 years after termination",
+            "unacceptable": "Less than 2 years or terminates immediately"
+        },
+        "definition_of_confidential_information": {
+            "preferred": "Broad definition including oral and written info",
+            "acceptable": "Written info marked confidential or oral info summarized",
+            "unacceptable": "Only written information marked confidential"
+        },
+        "permitted_disclosure": {
+            "preferred": "To employees, contractors, and advisors on need-to-know basis",
+            "acceptable": "To employees only",
+            "unacceptable": "No disclosure permitted even to advisors"
+        },
+        "return_of_materials": {
+            "preferred": "Return or destroy at Discloser's option within 10 days",
+            "acceptable": "Return or destroy within 30 days",
+            "unacceptable": "No obligation to return/destroy"
+        }
+    },
+    "required_clauses": [
+        "definition_of_confidential_information",
+        "exclusions_from_confidentiality",
+        "term_and_termination",
+        "remedies_injunctive_relief"
+    ],
+    "negotiation_priorities": {
+        "must_have": [
+            "standard_exclusions_(public_domain,_etc)",
+            "injunctive_relief_clause",
+            "no_obligation_to_proceed_with_transaction"
+        ],
+        "should_have": [
+            "perpetual_protection_for_trade_secrets",
+            "broad_definition_of_confidential_info"
+        ],
+        "nice_to_have": [
+            "attorney_fees_for_enforcement",
+            "residual_knowledge_clause"
+        ]
+    }
+}

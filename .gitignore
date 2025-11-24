@@ -1,0 +1,140 @@
+# ============================================
+# SENSITIVE FILES - DO NOT COMMIT
+# ============================================
+
+# Environment variables (API keys)
+.env
+.env.local
+.env.*.local
+
+# Actual contracts (sensitive data)
+real_contract.pdf
+**/real_contract.pdf
+
+# Any uploaded PDFs in input folder
+input_contracts/*.pdf
+input_contracts/**/*.pdf
+
+# Generated reports (may contain sensitive info)
+output_reports/*.md
+output_reports/**/*.md
+output_reports/*.docx
+output_reports/**/*.docx
+
+# Any personal/test contracts
+**/test_contract*.pdf
+**/sample_contract*.pdf
+**/private_*.pdf
+
+# ============================================
+# PYTHON
+# ============================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+contract_reviewer/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# ============================================
+# STREAMLIT
+# ============================================
+
+# Streamlit cache
+.streamlit/
+
+# ============================================
+# MACOS
+# ============================================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# ============================================
+# LOGS & DATABASES
+# ============================================
+
+*.log
+*.sql
+*.sqlite
+*.db
+
+# ============================================
+# TEMPORARY FILES
+# ============================================
+
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# ============================================
+# BACKUP FILES
+# ============================================
+
+*.bak
+*.backup
+*.old
+
+# ============================================
+# SYSTEM FILES
+# ============================================
+
+Thumbs.db
+ehthumbs.db
+Desktop.ini

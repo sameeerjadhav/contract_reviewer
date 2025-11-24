@@ -1,0 +1,73 @@
+{
+    "contract_type": "employment_agreement",
+    "version": "1.0",
+    "last_updated": "2025-11-20",
+    "preferred_terms": {
+        "offer_of_employment": {
+            "preferred": "Clear offer with start date and role",
+            "acceptable": "Basic offer details",
+            "unacceptable": "Vague or missing details"
+        },
+        "position_and_duties": {
+            "preferred": "Detailed list of responsibilities matching job title",
+            "acceptable": "General description of role",
+            "unacceptable": "Undefined duties or 'other duties as assigned' without scope"
+        },
+        "compensation_and_benefits": {
+            "preferred": "Competitive salary + equity + bonus",
+            "acceptable": "Market rate salary",
+            "unacceptable": "Unpaid or below minimum wage"
+        },
+        "term_of_employment": {
+            "preferred": "At-will (standard in US) or fixed term with renewal",
+            "acceptable": "Fixed term",
+            "unacceptable": "Indefinite without termination rights"
+        },
+        "supervision": {
+            "preferred": "Clear reporting line",
+            "acceptable": "General supervision",
+            "unacceptable": "No supervision specified"
+        },
+        "acceptance": {
+            "preferred": "Signature required",
+            "acceptable": "Reply to email",
+            "unacceptable": "No acceptance mechanism"
+        },
+        "termination_notice": {
+            "preferred": "At-will (US) or Mutual 30 days notice",
+            "acceptable": "Mutual 14 days notice",
+            "unacceptable": "Employee must give > 30 days notice while Employer gives none"
+        },
+        "non_compete": {
+            "preferred": "None or limited to direct competitors for 6 months",
+            "acceptable": "Direct competitors for 12 months, limited geography",
+            "unacceptable": "Broad non-compete > 12 months or unlimited geography"
+        },
+        "ip_assignment": {
+            "preferred": "Company owns IP created within scope of employment",
+            "acceptable": "Company owns IP related to company business",
+            "unacceptable": "Company owns all IP created by employee 24/7 (including hobby projects)"
+        }
+    },
+    "required_clauses": [
+        "compensation_and_benefits",
+        "at_will_employment_status",
+        "confidentiality_obligations",
+        "ip_assignment"
+    ],
+    "negotiation_priorities": {
+        "must_have": [
+            "clear_compensation_terms",
+            "no_unpaid_work",
+            "reasonable_ip_assignment_scope"
+        ],
+        "should_have": [
+            "severance_package",
+            "mutual_non_disparagement"
+        ],
+        "nice_to_have": [
+            "signing_bonus",
+            "remote_work_allowance"
+        ]
+    }
+}

@@ -1,0 +1,50 @@
+{
+    "contract_type": "msa",
+    "version": "1.0",
+    "last_updated": "2025-11-20",
+    "preferred_terms": {
+        "payment_terms": {
+            "preferred": "Net 30 days",
+            "acceptable": "Net 45 days",
+            "unacceptable": "Net 60+ days or Pay-when-paid"
+        },
+        "limitation_of_liability": {
+            "preferred": "Mutual cap at 12 months fees",
+            "acceptable": "Mutual cap at total contract value",
+            "unacceptable": "Uncapped liability or cap < 6 months fees"
+        },
+        "indemnification": {
+            "preferred": "Mutual indemnification for IP infringement and negligence",
+            "acceptable": "Provider indemnifies for IP infringement",
+            "unacceptable": "One-sided indemnification favoring Provider"
+        },
+        "warranty": {
+            "preferred": "Services performed in professional manner + 90 day fix warranty",
+            "acceptable": "Services performed in professional manner",
+            "unacceptable": "As-is / No warranty"
+        }
+    },
+    "required_clauses": [
+        "scope_of_services",
+        "payment_terms",
+        "term_and_termination",
+        "confidentiality",
+        "limitation_of_liability",
+        "governing_law"
+    ],
+    "negotiation_priorities": {
+        "must_have": [
+            "mutual_liability_cap",
+            "ip_ownership_clarity_(work_for_hire)",
+            "confidentiality_protection"
+        ],
+        "should_have": [
+            "non_solicitation_of_employees",
+            "dispute_resolution_procedure"
+        ],
+        "nice_to_have": [
+            "insurance_requirements",
+            "force_majeure"
+        ]
+    }
+}

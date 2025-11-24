@@ -1,0 +1,63 @@
+{
+  "contract_type": "saas_agreement",
+  "version": "2.1",
+  "last_updated": "2024-12-01",
+  "preferred_terms": {
+    "limitation_of_liability": {
+      "preferred": "24 months of fees paid",
+      "acceptable": "18 months of fees paid",
+      "minimum_acceptable": "12 months of fees paid",
+      "unacceptable": "Less than 12 months or no cap",
+      "rationale": "Need adequate protection for enterprise deployments where damages could be substantial"
+    },
+    "payment_terms": {
+      "preferred": "Net 30, quarterly in arrears",
+      "acceptable": "Net 45, quarterly in arrears",
+      "unacceptable": "Advance payment required, annual prepayment",
+      "rationale": "Cash flow management and standard business practice"
+    },
+    "service_level_agreement": {
+      "preferred": "99.9% uptime with tiered service credits",
+      "acceptable": "99.5% uptime with service credits",
+      "minimum_acceptable": "99.0% uptime with service credits",
+      "unacceptable": "No SLA or uptime < 99%",
+      "rationale": "Business continuity for critical systems"
+    },
+    "data_ownership": {
+      "preferred": "Customer owns all data, vendor has no rights",
+      "acceptable": "Customer owns data, vendor has limited license for service delivery only",
+      "unacceptable": "Vendor owns data or has broad usage rights",
+      "rationale": "Data privacy, regulatory compliance, competitive protection"
+    },
+    "term_and_renewal": {
+      "preferred": "1-3 year initial term, 1-year renewals, 60-day notice",
+      "acceptable": "3 year initial term, 1-year renewals, 90-day notice",
+      "unacceptable": ">3 year initial term or >5 year renewals, >120 day notice",
+      "rationale": "Flexibility to change vendors if needed"
+    }
+  },
+  "required_clauses": [
+    "limitation_of_liability",
+    "data_privacy",
+    "termination_rights",
+    "service_level_agreement",
+    "payment_terms"
+  ],
+  "negotiation_priorities": {
+    "must_have": [
+      "data_ownership_clarity",
+      "liability_cap_minimum_12_months",
+      "sla_with_service_credits"
+    ],
+    "should_have": [
+      "liability_cap_24_months",
+      "termination_for_convenience",
+      "60_day_renewal_notice"
+    ],
+    "nice_to_have": [
+      "volume_discounts",
+      "most_favored_customer_pricing",
+      "audit_rights"
+    ]
+  }
+}
