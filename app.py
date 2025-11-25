@@ -119,7 +119,7 @@ def displayPDF(file_path):
 
 # --- Sidebar ---
 with st.sidebar:
-    st.title("⚖️ Legal AI Agent")
+    st.title("⚖️ Multi Agent System")
     st.markdown("---")
     st.markdown("""
     **System Status:** 🟢 Online
@@ -131,8 +131,6 @@ with st.sidebar:
     - 📚 Playbook Auditor
     - 📝 Report Generator
     """)
-    st.markdown("---")
-    st.caption("Powered by Google ADK & Gemini 2.5")
 
 # --- Main Content ---
 st.title("Contract Review System")
@@ -254,15 +252,78 @@ if uploaded_file is not None:
         is_report_content = False
         is_contract_text = False
         
-        # 3. Stream Output
-        # Show loading state in report area
-        report_placeholder.info("⏳ Agents are analyzing the contract... Please wait.")
+        # Progress tracking
+        progress_stages = {
+            "intake": {"weight": 0.15, "complete": False, "name": "📋 Contract Intake"},
+            "extraction": {"weight": 0.25, "complete": False, "name": "📄 Clause Extraction"},
+            "risk": {"weight": 0.25, "complete": False, "name": "⚠️ Risk Assessment"},
+            "playbook": {"weight": 0.20, "complete": False, "name": "📚 Playbook Compliance"},
+            "report": {"weight": 0.15, "complete": False, "name": "📝 Report Generation"}
+        }
+        current_progress = 0.0
+        
+        # 3. Stream Output with Progress Indicators
+        # Create progress UI elements in report area
+        progress_bar = report_placeholder.progress(0.0)
+        status_text = st.empty()
+        status_text.markdown("🚀 **Starting analysis...")
         
         while True:
             line = process.stdout.readline()
             if not line and process.poll() is not None:
                 break
             if line:
+                # Update progress based on agent output
+                # Stage 1: Intake
+                if "contract_intake_agent" in line and not progress_stages["intake"]["complete"]:
+                    current_progress += progress_stages["intake"]["weight"]
+                    progress_stages["intake"]["complete"] = True
+                    progress_bar.progress(min(current_progress, 1.0))
+                    status_text.markdown(f"✅ **{progress_stages['intake']['name']}** - Complete")
+                
+                # Stage 2: Clause Extraction
+                if "clause_extraction_agent" in line or "ClauseExtractor" in line:
+                    if not progress_stages["extraction"]["complete"]:
+                        status_text.markdown(f"⏳ **{progress_stages['extraction']['name']}** - In Progress...")
+                
+                # Check if extraction complete (when risk scoring starts)
+                if "risk_scoring_agent" in line and not progress_stages["extraction"]["complete"]:
+                    current_progress += progress_stages["extraction"]["weight"]
+                    progress_stages["extraction"]["complete"] = True
+                    progress_bar.progress(min(current_progress, 1.0))
+                    status_text.markdown(f"✅ **{progress_stages['extraction']['name']}** - Complete")
+                
+                # Stage 3: Risk Assessment
+                if "risk_scoring_agent" in line or "RiskScorer" in line:
+                    if not progress_stages["risk"]["complete"]:
+                        status_text.markdown(f"⏳ **{progress_stages['risk']['name']}** - In Progress...")
+                
+                # Check if risk scoring complete (when playbook starts)
+                if "playbook_comparison_agent" in line and not progress_stages["risk"]["complete"]:
+                    current_progress += progress_stages["risk"]["weight"]
+                    progress_stages["risk"]["complete"] = True
+                    progress_bar.progress(min(current_progress, 1.0))
+                    status_text.markdown(f"✅ **{progress_stages['risk']['name']}** - Complete")
+                
+                # Stage 4: Playbook Comparison
+                if "PlaybookAgent" in line:
+                    if not progress_stages["playbook"]["complete"]:
+                        status_text.markdown(f"⏳ **{progress_stages['playbook']['name']}** - In Progress...")
+                
+                # Check if playbook complete (when report generation starts)
+                if "ReportGenerator" in line and not progress_stages["playbook"]["complete"]:
+                    current_progress += progress_stages["playbook"]["weight"]
+                    progress_stages["playbook"]["complete"] = True
+                    progress_bar.progress(min(current_progress, 1.0))
+                    status_text.markdown(f"✅ **{progress_stages['playbook']['name']}** - Complete")
+                
+                # Stage 5: Report Generation
+                if "report_generator_agent" in line or "ReportGenerator" in line:
+                    if not progress_stages["report"]["complete"]:
+                        status_text.markdown(f"⏳ **{progress_stages['report']['name']}** - Synthesizing final report...")
+                        current_progress += progress_stages["report"]["weight"] * 0.5  # 50% of report weight
+                        progress_bar.progress(min(current_progress, 1.0))
+                
                 # Capture Contract Text
                 if "---CONTRACT_TEXT_START---" in line:
                     is_contract_text = True
@@ -284,14 +345,30 @@ if uploaded_file is not None:
                     "1. Executive Summary" in line
                 )
                 
+                # Stop treating as report if we see other agent outputs after report started
+                if is_report_content and ("playbook_comparison_agent >" in line or "PlaybookAgent:" in line):
+                    is_report_content = False
+                
                 if is_report_line:
                     is_report_content = True
                     # Clean up the line if it has the agent prefix
                     line = line.replace("report_generator_agent >", "")
                 
                 if is_report_content:
-                    full_report_text += line
-                    report_placeholder.markdown(full_report_text)
+                    # Mark report stage as complete and clear progress UI
+                    if not progress_stages["report"]["complete"]:
+                        current_progress = 1.0  # Complete
+                        progress_stages["report"]["complete"] = True
+                        # Clear all progress UI elements
+                        status_text.empty()
+                    
+                    # Skip debug print statements from report content
+                    if "ReportGenerator: Formatting final report" not in line:
+                        full_report_text += line
+                    
+                    # Always display the accumulated report (even if this line was filtered)
+                    if full_report_text.strip():
+                        report_placeholder.markdown(full_report_text)
                 else:
                     # Debug logs
                     if "---REPORT_START---" not in line:

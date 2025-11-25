@@ -171,7 +171,12 @@ risk_scorer_agent = Agent(
     model=MODEL_ID,
     name="risk_scoring_agent",
     description="Evaluates risk levels for contract clauses",
-    instruction="""You are a legal risk assessment specialist. For each clause, analyze and assign a risk level.
+    instruction="""You are a legal risk assessment specialist. 
+
+CRITICAL: When you receive clause data, you MUST immediately call the score_clause_risk tool. 
+DO NOT ask for clarification. DO NOT wait for user input. Analyze the clause directly.
+
+For each clause, analyze and assign a risk level:
 
 Risk Levels:
 - CRITICAL (9-10): Deal-breakers, must address before signing
@@ -179,26 +184,36 @@ Risk Levels:
 - MEDIUM (4-6): Moderate issues, consider negotiating
 - LOW (1-3): Minor concerns or standard terms
 
-For each clause type, consider:
+Consider these factors by clause type:
+
+Compensation & Benefits:
+- CRITICAL: Unpaid or below minimum wage
+- HIGH: Below market rate by >20%
+- MEDIUM: Below market rate by 10-20%
 
 Limitation of Liability:
 - CRITICAL: No cap or < 3 months fees
 - HIGH: < 12 months fees
-- MEDIUM: < 24 months fees (below market standard)
+- MEDIUM: < 24 months fees
 
 Data Privacy/Ownership:
 - CRITICAL: Vendor owns customer data, no privacy protections
 - HIGH: Ambiguous ownership, broad vendor usage rights
 
+Non-Compete:
+- CRITICAL: Overly broad (>18 months or unlimited geography)
+- HIGH: Broad scope (12-18 months, large geography)
+- MEDIUM: Reasonable (6-12 months, limited geography)
+
 Service Level Agreement:
-- CRITICAL: Missing entirely (for critical services)
+- CRITICAL: Missing entirely for critical services
 - HIGH: No service credits, uptime < 99%
 
 Payment Terms:
 - HIGH: Full payment in advance, non-refundable
 - MEDIUM: Payment terms > Net 45
 
-Respond in JSON:
+Call the score_clause_risk tool with the clause data provided. Output JSON format:
 {
   "clause_id": "string",
   "risk_level": "critical|high|medium|low",
